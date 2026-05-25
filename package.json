@@ -1,0 +1,24 @@
+{
+  "name": "adsta-api",
+  "version": "1.0.0",
+  "description": "API REST para ADSTA - Sistema turístico de San Agustín (Huila, Colombia)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "turismo",
+    "san-agustin",
+    "express",
+    "api-rest"
+  ],
+  "author": "ADSTA",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

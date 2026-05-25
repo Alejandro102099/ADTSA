@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ADSTA — Turismo San Agustín</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
+
+    :root {
+      --verde-oscuro: #1a4d3e;
+      --verde: #2d6a4f;
+      --verde-claro: #52b788;
+      --beige: #f4efe6;
+      --beige-oscuro: #e8dfd0;
+      --azul: #1d4e89;
+      --azul-claro: #4a90c2;
+      --blanco: #ffffff;
+      --texto: #1c2b28;
+      --texto-suave: #5c6b66;
+      --sombra: 0 12px 40px rgba(26, 77, 62, 0.12);
+      --sombra-suave: 0 4px 20px rgba(26, 77, 62, 0.08);
+      --radio: 16px;
+      --transicion: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--texto);
+      background: var(--beige);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Fondo decorativo */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 10% 0%, rgba(82, 183, 136, 0.18), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 90% 10%, rgba(74, 144, 194, 0.14), transparent 50%),
+        radial-gradient(ellipse 70% 60% at 50% 100%, rgba(45, 106, 79, 0.1), transparent 60%),
+        linear-gradient(180deg, var(--beige) 0%, #ebe4d8 100%);
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d6a4f' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: -1;
+      opacity: 0.6;
+    }
+
+    /* ——— Encabezado ——— */
+    .header {
+      background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde) 45%, var(--azul) 100%);
+      color: var(--blanco);
+      padding: 2.5rem 1.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+      animation: fadeDown 0.8s ease-out;
+    }
+
+    .header::before {
+      content: "";
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 420px;
+      height: 420px;
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--verde-claro), var(--azul-claro), var(--beige));
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .logo-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.2);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 0.5rem;
+    }
+
+    .header h1 {
+      font-family: "Cormorant Garamond", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+    }
+
+    .header p {
+      margin-top: 0.6rem;
+      opacity: 0.9;
+      font-size: 1rem;
+      max-width: 520px;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    .header-meta span::before { content: "◆ "; color: var(--verde-claro); }
+
+    /* ——— Contenedor principal ——— */
+    .main {
+      max-width: 1200px;
+      margin: -2rem auto 0;
+      padding: 0 1.25rem 3rem;
+      position: relative;
+      z-index: 2;
+      animation: fadeUp 0.8s ease-out 0.15s both;
+    }
+
+    /* ——— Tarjetas estadísticas ——— */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .stat-card {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      padding: 1.25rem 1.5rem;
+      box-shadow: var(--sombra-suave);
+      border: 1px solid rgba(45, 106, 79, 0.08);
+      transition: transform var(--transicion), box-shadow var(--transicion);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--sombra);
+    }
+
+    .stat-card .label {
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
+    }
+
+    .stat-card .value {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--verde);
+      margin-top: 0.25rem;
+    }
+
+    .stat-card.azul .value { color: var(--azul); }
+
+    /* ——— Layout dashboard ——— */
+    .dashboard {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 960px) {
+      .dashboard { grid-template-columns: 1fr; }
+    }
+
+    /* ——— Sección tabla ——— */
+    .section-card {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra-suave);
+      border: 1px solid rgba(45, 106, 79, 0.08);
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--beige-oscuro);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .section-header h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.5rem;
+      color: var(--verde-oscuro);
+    }
+
+    .btn-refresh {
+      background: var(--beige);
+      border: 1px solid var(--beige-oscuro);
+      color: var(--verde);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transicion);
+    }
+
+    .btn-refresh:hover {
+      background: var(--verde);
+      color: var(--blanco);
+      border-color: var(--verde);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      padding: 0 0 0.5rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    thead {
+      background: linear-gradient(180deg, var(--beige) 0%, var(--beige-oscuro) 100%);
+    }
+
+    th {
+      text-align: left;
+      padding: 1rem 1.25rem;
+      font-weight: 600;
+      color: var(--verde-oscuro);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 1rem 1.25rem;
+      border-top: 1px solid var(--beige);
+      vertical-align: middle;
+    }
+
+    tbody tr {
+      transition: background var(--transicion);
+      animation: rowIn 0.4s ease-out both;
+    }
+
+    tbody tr:hover { background: rgba(82, 183, 136, 0.06); }
+
+    .precio {
+      font-weight: 700;
+      color: var(--azul);
+      white-space: nowrap;
+    }
+
+    .badge-disp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .badge-disp.si {
+      background: rgba(82, 183, 136, 0.2);
+      color: var(--verde);
+    }
+
+    .badge-disp.no {
+      background: rgba(220, 80, 80, 0.12);
+      color: #b33;
+    }
+
+    .badge-disp::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .acciones {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      padding: 0.4rem 0.85rem;
+      border: none;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transicion);
+    }
+
+    .btn-editar {
+      background: rgba(29, 78, 137, 0.1);
+      color: var(--azul);
+    }
+
+    .btn-editar:hover {
+      background: var(--azul);
+      color: var(--blanco);
+    }
+
+    .btn-eliminar {
+      background: rgba(180, 50, 50, 0.1);
+      color: #a33;
+    }
+
+    .btn-eliminar:hover {
+      background: #c44;
+      color: var(--blanco);
+    }
+
+    .empty-state, .loading-state {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      color: var(--texto-suave);
+    }
+
+    .loading-state .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--beige-oscuro);
+      border-top-color: var(--verde);
+      border-radius: 50%;
+      margin: 0 auto 1rem;
+      animation: spin 0.8s linear infinite;
+    }
+
+    /* ——— Formulario ——— */
+    .form-card {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      border: 1px solid rgba(45, 106, 79, 0.1);
+      padding: 1.5rem;
+      position: sticky;
+      top: 1.5rem;
+      animation: fadeUp 0.8s ease-out 0.25s both;
+    }
+
+    .form-card h2 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.4rem;
+      color: var(--verde-oscuro);
+      margin-bottom: 0.25rem;
+    }
+
+    .form-card .subtitle {
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--verde-oscuro);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid var(--beige-oscuro);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: var(--beige);
+      color: var(--texto);
+      transition: border-color var(--transicion), box-shadow var(--transicion);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--verde-claro);
+      box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.2);
+      background: var(--blanco);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 80px; }
+
+    .btn-primary {
+      width: 100%;
+      padding: 0.95rem 1.5rem;
+      margin-top: 0.5rem;
+      background: linear-gradient(135deg, var(--verde) 0%, var(--verde-oscuro) 100%);
+      color: var(--blanco);
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      box-shadow: 0 6px 20px rgba(45, 106, 79, 0.35);
+      transition: transform var(--transicion), box-shadow var(--transicion);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(45, 106, 79, 0.4);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* ——— Toast mensajes ——— */
+    .toast-container {
+      position: fixed;
+      top: 1.25rem;
+      right: 1.25rem;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      max-width: 360px;
+      width: calc(100% - 2.5rem);
+    }
+
+    .toast {
+      padding: 1rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: var(--sombra);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      animation: toastIn 0.4s ease-out, toastOut 0.4s ease-in 4.6s forwards;
+      border-left: 4px solid;
+    }
+
+    .toast.exito {
+      background: var(--blanco);
+      color: var(--verde-oscuro);
+      border-left-color: var(--verde-claro);
+    }
+
+    .toast.error {
+      background: #fff5f5;
+      color: #822;
+      border-left-color: #e55;
+    }
+
+    .toast-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+    /* ——— Modal editar ——— */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 77, 62, 0.45);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .modal-overlay.activo { display: flex; }
+
+    .modal {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      max-width: 480px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--sombra);
+      animation: scaleIn 0.35s ease-out;
+    }
+
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--beige);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.35rem;
+      color: var(--verde-oscuro);
+    }
+
+    .btn-cerrar {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--texto-suave);
+      cursor: pointer;
+      line-height: 1;
+      padding: 0.25rem;
+      transition: color var(--transicion);
+    }
+
+    .btn-cerrar:hover { color: var(--texto); }
+
+    .modal-body { padding: 1.5rem; }
+
+    .modal-footer {
+      padding: 1rem 1.5rem 1.5rem;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-secondary {
+      flex: 1;
+      padding: 0.85rem;
+      background: var(--beige);
+      border: 1px solid var(--beige-oscuro);
+      border-radius: 10px;
+      font-family: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--texto);
+      transition: all var(--transicion);
+    }
+
+    .btn-secondary:hover { background: var(--beige-oscuro); }
+
+    .modal-footer .btn-primary { flex: 2; margin-top: 0; }
+
+    /* ——— Footer ——— */
+    .footer {
+      text-align: center;
+      padding: 2rem 1.5rem;
+      color: var(--texto-suave);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--beige-oscuro);
+      margin-top: 2rem;
+      background: rgba(255,255,255,0.5);
+    }
+
+    .footer strong { color: var(--verde); }
+
+    /* ——— Animaciones ——— */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes rowIn {
+      from { opacity: 0; transform: translateX(-8px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateX(100%); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes toastOut {
+      to { opacity: 0; transform: translateX(100%); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 600px) {
+      th, td { padding: 0.75rem 0.85rem; font-size: 0.82rem; }
+      .header { padding: 2rem 1rem 2.5rem; }
+      .form-card { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Encabezado -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo-row">
+        <div class="logo-icon" aria-hidden="true">🏛️</div>
+        <div>
+          <span class="badge">Huila · Colombia</span>
+          <h1>ADSTA API - Turismo en San Agustín</h1>
+        </div>
+      </div>
+      <p>Gestión de alojamientos — Parque Arqueológico, naturaleza y cultura ancestral en un solo panel.</p>
+      <div class="header-meta">
+        <span>Patrimonio UNESCO</span>
+        <span>API REST · Puerto 3000</span>
+        <span>Dashboard en vivo</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección principal -->
+  <main class="main">
+    <div class="stats">
+      <div class="stat-card">
+        <div class="label">Hoteles registrados</div>
+        <div class="value" id="statTotal">—</div>
+      </div>
+      <div class="stat-card azul">
+        <div class="label">Con disponibilidad</div>
+        <div class="value" id="statDisponibles">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Estado API</div>
+        <div class="value" id="statApi" style="font-size:1.4rem;">—</div>
+      </div>
+    </div>
+
+    <div class="dashboard">
+      <!-- Tabla de hoteles -->
+      <section class="section-card" aria-labelledby="tablaTitulo">
+        <div class="section-header">
+          <h2 id="tablaTitulo">Hoteles en San Agustín</h2>
+          <button type="button" class="btn-refresh" id="btnRefresh" title="Recargar datos">
+            ↻ Actualizar
+          </button>
+        </div>
+        <div class="table-wrap">
+          <div id="tablaContenido">
+            <div class="loading-state">
+              <div class="spinner"></div>
+              <p>Cargando hoteles desde la API…</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Formulario agregar -->
+      <aside class="form-card">
+        <h2>Nuevo alojamiento</h2>
+        <p class="subtitle">Registra un hotel y publícalo al instante en ADSTA.</p>
+        <form id="formAgregar" novalidate>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Hotel Macondo" />
+          </div>
+          <div class="form-group">
+            <label for="ubicacion">Ubicación</label>
+            <input type="text" id="ubicacion" name="ubicacion" required placeholder="Centro, San Agustín, Huila" />
+          </div>
+          <div class="form-group">
+            <label for="precio">Precio (COP / noche)</label>
+            <input type="number" id="precio" name="precio" required min="0" step="1000" placeholder="120000" />
+          </div>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" required placeholder="Describe el hotel y sus servicios…"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="disponibilidad">Disponibilidad</label>
+            <select id="disponibilidad" name="disponibilidad" required>
+              <option value="true">Disponible</option>
+              <option value="false">No disponible</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary" id="btnAgregar">Agregar Hotel</button>
+        </form>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Modal editar -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modalTitulo">Editar hotel</h3>
+        <button type="button" class="btn-cerrar" id="btnCerrarModal" aria-label="Cerrar">×</button>
+      </div>
+      <form id="formEditar">
+        <div class="modal-body">
+          <input type="hidden" id="editId" />
+          <div class="form-group">
+            <label for="editNombre">Nombre</label>
+            <input type="text" id="editNombre" required />
+          </div>
+          <div class="form-group">
+            <label for="editUbicacion">Ubicación</label>
+            <input type="text" id="editUbicacion" required />
+          </div>
+          <div class="form-group">
+            <label for="editPrecio">Precio (COP)</label>
+            <input type="number" id="editPrecio" required min="0" step="1000" />
+          </div>
+          <div class="form-group">
+            <label for="editDescripcion">Descripción</label>
+            <textarea id="editDescripcion" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="editDisponibilidad">Disponibilidad</label>
+            <select id="editDisponibilidad" required>
+              <option value="true">Disponible</option>
+              <option value="false">No disponible</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" id="btnCancelarEditar">Cancelar</button>
+          <button type="submit" class="btn-primary">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p><strong>ADSTA</strong> — Plataforma turística · San Agustín, Huila, Colombia</p>
+    <p>Hoteles · Planes · Reservas · Geolocalización · Reportes</p>
+    <p style="margin-top:0.5rem; opacity:0.75;">© 2026 ADSTA. Modernizando el turismo local.</p>
+  </footer>
+
+  <script>
+    const API_BASE = "http://localhost:3000";
+
+    const $ = (sel) => document.querySelector(sel);
+    const toastContainer = $("#toastContainer");
+    const tablaContenido = $("#tablaContenido");
+    const formAgregar = $("#formAgregar");
+    const modalOverlay = $("#modalOverlay");
+    const formEditar = $("#formEditar");
+
+    let hotelesCache = [];
+
+    /** Formatea precio en pesos colombianos */
+    function formatearPrecio(valor) {
+      return new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        maximumFractionDigits: 0,
+      }).format(valor);
+    }
+
+    /** Muestra notificación toast */
+    function mostrarToast(mensaje, tipo = "exito") {
+      const toast = document.createElement("div");
+      toast.className = `toast ${tipo}`;
+      toast.innerHTML = `
+        <span class="toast-icon">${tipo === "exito" ? "✓" : "⚠"}</span>
+        <span>${mensaje}</span>
+      `;
+      toastContainer.appendChild(toast);
+      setTimeout(() => toast.remove(), 5000);
+    }
+
+    /** Petición fetch genérica con manejo de errores */
+    async function apiRequest(url, options = {}) {
+      const res = await fetch(url, {
+        headers: { "Content-Type": "application/json", ...options.headers },
+        ...options,
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.mensaje || `Error ${res.status}`);
+      }
+      return data;
+    }
+
+    /** Actualiza tarjetas de estadísticas */
+    function actualizarStats(hoteles) {
+      $("#statTotal").textContent = hoteles.length;
+      $("#statDisponibles").textContent = hoteles.filter((h) => h.disponibilidad).length;
+      $("#statApi").textContent = "✓";
+      $("#statApi").style.color = "var(--verde)";
+    }
+
+    /** Renderiza la tabla de hoteles */
+    function renderizarTabla(hoteles) {
+      hotelesCache = hoteles;
+      actualizarStats(hoteles);
+
+      if (!hoteles.length) {
+        tablaContenido.innerHTML = `
+          <div class="empty-state">
+            <p>No hay hoteles registrados. Agrega el primero con el formulario.</p>
+          </div>`;
+        return;
+      }
+
+      const filas = hoteles
+        .map(
+          (h, i) => `
+        <tr style="animation-delay:${i * 0.05}s">
+          <td><strong>${h.id}</strong></td>
+          <td>${escapeHtml(h.nombre)}</td>
+          <td>${escapeHtml(h.ubicacion)}</td>
+          <td class="precio">${formatearPrecio(h.precio)}</td>
+          <td>
+            <span class="badge-disp ${h.disponibilidad ? "si" : "no"}">
+              ${h.disponibilidad ? "Disponible" : "Ocupado"}
+            </span>
+          </td>
+          <td>
+            <div class="acciones">
+              <button type="button" class="btn-sm btn-editar" data-editar="${h.id}">Editar</button>
+              <button type="button" class="btn-sm btn-eliminar" data-eliminar="${h.id}">Eliminar</button>
+            </div>
+          </td>
+        </tr>`
+        )
+        .join("");
+
+      tablaContenido.innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Ubicación</th>
+              <th>Precio</th>
+              <th>Disponibilidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>${filas}</tbody>
+        </table>`;
+
+      document.querySelectorAll("[data-editar]").forEach((btn) => {
+        btn.addEventListener("click", () => abrirModalEditar(Number(btn.dataset.editar)));
+      });
+
+      document.querySelectorAll("[data-eliminar]").forEach((btn) => {
+        btn.addEventListener("click", () => eliminarHotel(Number(btn.dataset.eliminar)));
+      });
+    }
+
+    function escapeHtml(texto) {
+      const div = document.createElement("div");
+      div.textContent = texto;
+      return div.innerHTML;
+    }
+
+    /** GET /hoteles — Cargar listado */
+    async function cargarHoteles() {
+      tablaContenido.innerHTML = `
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Cargando hoteles…</p>
+        </div>`;
+      $("#statApi").textContent = "…";
+
+      try {
+        const json = await apiRequest(`${API_BASE}/hoteles`);
+        renderizarTabla(json.data || []);
+      } catch (err) {
+        $("#statApi").textContent = "✗";
+        $("#statApi").style.color = "#c44";
+        tablaContenido.innerHTML = `
+          <div class="empty-state">
+            <p>No se pudo conectar con la API en <code>${API_BASE}</code>.</p>
+            <p style="margin-top:0.5rem;font-size:0.85rem;">${escapeHtml(err.message)}</p>
+            <p style="margin-top:0.75rem;">Ejecuta <strong>npm run dev</strong> y abre <strong>/panel</strong></p>
+          </div>`;
+        mostrarToast("Error al cargar hoteles: " + err.message, "error");
+      }
+    }
+
+    /** POST /hoteles — Agregar hotel */
+    formAgregar.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = $("#btnAgregar");
+      btn.disabled = true;
+
+      const body = {
+        nombre: $("#nombre").value.trim(),
+        ubicacion: $("#ubicacion").value.trim(),
+        precio: Number($("#precio").value),
+        descripcion: $("#descripcion").value.trim(),
+        disponibilidad: $("#disponibilidad").value === "true",
+      };
+
+      try {
+        await apiRequest(`${API_BASE}/hoteles`, {
+          method: "POST",
+          body: JSON.stringify(body),
+        });
+        mostrarToast("Hotel agregado correctamente.");
+        formAgregar.reset();
+        await cargarHoteles();
+      } catch (err) {
+        mostrarToast(err.message, "error");
+      } finally {
+        btn.disabled = false;
+      }
+    });
+
+    /** DELETE /hoteles/:id */
+    async function eliminarHotel(id) {
+      const hotel = hotelesCache.find((h) => h.id === id);
+      const nombre = hotel ? hotel.nombre : `id ${id}`;
+      if (!confirm(`¿Eliminar "${nombre}"? Esta acción no se puede deshacer.`)) return;
+
+      try {
+        await apiRequest(`${API_BASE}/hoteles/${id}`, { method: "DELETE" });
+        mostrarToast("Hotel eliminado.");
+        await cargarHoteles();
+      } catch (err) {
+        mostrarToast(err.message, "error");
+      }
+    }
+
+    /** Abrir modal de edición */
+    function abrirModalEditar(id) {
+      const hotel = hotelesCache.find((h) => h.id === id);
+      if (!hotel) return;
+
+      $("#editId").value = hotel.id;
+      $("#editNombre").value = hotel.nombre;
+      $("#editUbicacion").value = hotel.ubicacion;
+      $("#editPrecio").value = hotel.precio;
+      $("#editDescripcion").value = hotel.descripcion;
+      $("#editDisponibilidad").value = String(hotel.disponibilidad);
+
+      modalOverlay.classList.add("activo");
+    }
+
+    function cerrarModal() {
+      modalOverlay.classList.remove("activo");
+    }
+
+    $("#btnCerrarModal").addEventListener("click", cerrarModal);
+    $("#btnCancelarEditar").addEventListener("click", cerrarModal);
+    modalOverlay.addEventListener("click", (e) => {
+      if (e.target === modalOverlay) cerrarModal();
+    });
+
+    /** PUT /hoteles/:id */
+    formEditar.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const id = $("#editId").value;
+      const body = {
+        nombre: $("#editNombre").value.trim(),
+        ubicacion: $("#editUbicacion").value.trim(),
+        precio: Number($("#editPrecio").value),
+        descripcion: $("#editDescripcion").value.trim(),
+        disponibilidad: $("#editDisponibilidad").value === "true",
+      };
+
+      try {
+        await apiRequest(`${API_BASE}/hoteles/${id}`, {
+          method: "PUT",
+          body: JSON.stringify(body),
+        });
+        mostrarToast("Hotel actualizado.");
+        cerrarModal();
+        await cargarHoteles();
+      } catch (err) {
+        mostrarToast(err.message, "error");
+      }
+    });
+
+    $("#btnRefresh").addEventListener("click", cargarHoteles);
+
+    document.addEventListener("DOMContentLoaded", cargarHoteles);
+  </script>
+</body>
+</html>
