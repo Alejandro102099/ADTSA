@@ -1,6 +1,12 @@
-# ADSTA API — Turismo en San Agustín
+# ADTSA — Agencia de Turismo en San Agustín
 
-API REST para **ADSTA**, plataforma turística de **San Agustín (Huila, Colombia)**. Gestiona hoteles, planes turísticos y reservas en memoria (sin base de datos por ahora).
+La plataforma de tecnólogia ADTSA esta pensada, para posicionarse como la solución líder en la gestión y promoción turística
+de **San Agustín (Huila, Colombia)**. Nuestro proposito es brindar los mejores alojamientos, buena información turistica con una buena experiencia segura, transparente y enriquecedora, para que se sientan conectados con San Agustín, su alegria y magia de las personas, nuestra cultura ancestral y la riqueza natural de este hermoso pueblo.
+
+A través de esta aplicación, los turistas y usuarios pueden:
+* **Gestionar hoteles, planes turísticos y reservas en memoria (sin base de datos por el momento)
+
+El objetivo fundamental de ADTSA es transformar la información en una herramienta de hospitalidad, logrando que cada viajero que llegue al municipio se sienta guiado, seguro y motivado a tener unas vacaciones inolvidables. 
 
 **URL base:** `http://localhost:3000`
 
