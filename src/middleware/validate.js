@@ -1,7 +1,8 @@
 /**
- * Utilidades de validación para evitar registros incompletos.
+ * Comprueba que el JSON enviado en POST/PUT tenga los campos obligatorios.
  */
 
+/** Rechaza con 400 si falta algún campo requerido o viene vacío */
 function validarCamposRequeridos(body, camposRequeridos) {
   const camposFaltantes = camposRequeridos.filter((campo) => {
     const valor = body[campo];
@@ -21,6 +22,7 @@ function validarCamposRequeridos(body, camposRequeridos) {
   }
 }
 
+/** En reservas: solo acepta tipoReserva "hotel" o "plan" */
 function validarTipoReserva(tipoReserva) {
   const tiposValidos = ["hotel", "plan"];
   if (!tiposValidos.includes(tipoReserva)) {

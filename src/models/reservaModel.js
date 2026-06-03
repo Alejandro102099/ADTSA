@@ -1,6 +1,5 @@
 /**
- * Modelo en memoria para reservas de ADSTA.
- * Una reserva puede asociarse a un hotel o a un plan turístico.
+ * Almacén en memoria de reservas; cada una apunta a un hotel o a un plan por id.
  */
 
 const { reservasIniciales } = require("../data/seed");
@@ -18,9 +17,7 @@ const CAMPOS_REQUERIDOS = [
   "cantidadPersonas",
 ];
 
-/**
- * Resuelve el nombre del hotel o plan según tipo e id.
- */
+/** Obtiene el nombre del hotel o plan reservado según tipoReserva y reservadoId */
 function resolverNombreReservado(tipoReserva, reservadoId) {
   if (tipoReserva === "hotel") {
     const hotel = hotelModel.obtenerPorId(reservadoId);
@@ -33,6 +30,7 @@ function resolverNombreReservado(tipoReserva, reservadoId) {
   return null;
 }
 
+/** Comprueba que reservadoId exista en hoteles o en planes */
 function validarReservadoExiste(tipoReserva, reservadoId) {
   if (tipoReserva === "hotel") {
     return hotelModel.obtenerPorId(reservadoId) !== undefined;
@@ -51,6 +49,7 @@ function obtenerPorId(id) {
   return reservas.find((r) => r.id === id);
 }
 
+/** Crea la reserva y completa reservadoNombre si no viene en el body */
 function crear(datos) {
   const reservadoNombre =
     datos.reservadoNombre ||
@@ -70,6 +69,7 @@ function crear(datos) {
   return nuevaReserva;
 }
 
+/** Actualiza la reserva y recalcula reservadoNombre si cambia hotel/plan */
 function actualizar(id, datos) {
   const indice = reservas.findIndex((r) => r.id === id);
   if (indice === -1) return null;

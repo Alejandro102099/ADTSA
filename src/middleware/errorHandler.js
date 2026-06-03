@@ -1,7 +1,8 @@
 /**
- * Middleware centralizado para manejo de errores HTTP.
+ * Respuestas uniformes cuando la ruta no existe o ocurre un error en la API.
  */
 
+/** Devuelve 404 si la URL o el método HTTP no están definidos en la app */
 function notFoundHandler(req, res) {
   res.status(404).json({
     success: false,
@@ -9,6 +10,7 @@ function notFoundHandler(req, res) {
   });
 }
 
+/** Captura errores lanzados en controladores; usa statusCode del error o 500 por defecto */
 function errorHandler(err, req, res, next) {
   console.error("[ADSTA Error]", err.message);
 

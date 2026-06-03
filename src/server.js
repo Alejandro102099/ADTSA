@@ -1,12 +1,12 @@
 /**
- * Punto de entrada del servidor ADSTA.
- * Escucha en el puerto 3000.
+ * Punto de entrada: arranca Express y deja la API escuchando en el puerto 3000.
  */
 
 const app = require("./app");
 
 const PORT = 3000;
 
+/* Inicia el servidor y muestra en consola las URLs principales */
 app.listen(PORT, () => {
   console.log("========================================");
   console.log("  ADSTA API - Turismo San Agustín");

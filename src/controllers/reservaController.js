@@ -1,5 +1,5 @@
 /**
- * Controlador de reservas - hoteles y planes turísticos.
+ * Recibe peticiones HTTP de reservas; valida que el hotel o plan exista.
  */
 
 const reservaModel = require("../models/reservaModel");
@@ -13,6 +13,7 @@ function parseId(param) {
   return Number.isNaN(id) ? null : id;
 }
 
+/** GET /reservas — Lista todas las reservas */
 function obtenerReservas(req, res, next) {
   try {
     const reservas = reservaModel.obtenerTodos();
@@ -26,6 +27,7 @@ function obtenerReservas(req, res, next) {
   }
 }
 
+/** GET /reservas/:id — Una reserva o 404 */
 function obtenerReservaPorId(req, res, next) {
   try {
     const id = parseId(req.params.id);
@@ -50,6 +52,7 @@ function obtenerReservaPorId(req, res, next) {
   }
 }
 
+/** POST /reservas — Crea reserva si el hotel/plan referenciado existe */
 function crearReserva(req, res, next) {
   try {
     validarCamposRequeridos(req.body, reservaModel.CAMPOS_REQUERIDOS);
@@ -74,6 +77,7 @@ function crearReserva(req, res, next) {
   }
 }
 
+/** PUT /reservas/:id — Actualiza reserva y revalida hotel/plan */
 function actualizarReserva(req, res, next) {
   try {
     const id = parseId(req.params.id);
@@ -113,6 +117,7 @@ function actualizarReserva(req, res, next) {
   }
 }
 
+/** DELETE /reservas/:id — Elimina reserva */
 function eliminarReserva(req, res, next) {
   try {
     const id = parseId(req.params.id);

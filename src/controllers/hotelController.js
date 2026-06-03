@@ -1,15 +1,17 @@
 /**
- * Controlador de hoteles - lógica de negocio y respuestas HTTP.
+ * Recibe peticiones HTTP de hoteles, valida datos y responde en JSON.
  */
 
 const hotelModel = require("../models/hotelModel");
 const { validarCamposRequeridos } = require("../middleware/validate");
 
+/** Convierte :id de la URL a número; null si no es válido */
 function parseId(param) {
   const id = parseInt(param, 10);
   return Number.isNaN(id) ? null : id;
 }
 
+/** GET /hoteles — Lista todos los hoteles */
 function obtenerHoteles(req, res, next) {
   try {
     const hoteles = hotelModel.obtenerTodos();
@@ -23,6 +25,7 @@ function obtenerHoteles(req, res, next) {
   }
 }
 
+/** GET /hoteles/:id — Un hotel o 404 */
 function obtenerHotelPorId(req, res, next) {
   try {
     const id = parseId(req.params.id);
@@ -47,6 +50,7 @@ function obtenerHotelPorId(req, res, next) {
   }
 }
 
+/** POST /hoteles — Crea hotel; responde 201 */
 function crearHotel(req, res, next) {
   try {
     validarCamposRequeridos(req.body, hotelModel.CAMPOS_REQUERIDOS);
@@ -62,6 +66,7 @@ function crearHotel(req, res, next) {
   }
 }
 
+/** PUT /hoteles/:id — Actualiza hotel existente */
 function actualizarHotel(req, res, next) {
   try {
     const id = parseId(req.params.id);
@@ -92,6 +97,7 @@ function actualizarHotel(req, res, next) {
   }
 }
 
+/** DELETE /hoteles/:id — Elimina y devuelve el registro borrado */
 function eliminarHotel(req, res, next) {
   try {
     const id = parseId(req.params.id);

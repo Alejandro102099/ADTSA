@@ -1,8 +1,8 @@
 /**
- * Datos iniciales precargados en memoria para ADSTA.
- * San Agustín, Huila - Colombia
+ * Datos de ejemplo que cargan los modelos al iniciar el servidor (sin base de datos).
  */
 
+/* Tres hoteles ficticios de San Agustín para probar GET /hoteles */
 const hotelesIniciales = [
   {
     id: 1,
@@ -33,6 +33,7 @@ const hotelesIniciales = [
   },
 ];
 
+/* Tres planes turísticos para probar GET /planes */
 const planesIniciales = [
   {
     id: 1,
@@ -63,6 +64,7 @@ const planesIniciales = [
   },
 ];
 
+/* Tres reservas de ejemplo (hotel o plan) para probar GET /reservas */
 const reservasIniciales = [
   {
     id: 1,

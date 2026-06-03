@@ -1,5 +1,5 @@
 /**
- * Controlador de planes turísticos - lógica de negocio y respuestas HTTP.
+ * Recibe peticiones HTTP de planes turísticos y responde en JSON.
  */
 
 const planModel = require("../models/planModel");
@@ -10,6 +10,7 @@ function parseId(param) {
   return Number.isNaN(id) ? null : id;
 }
 
+/** GET /planes — Lista todos los planes */
 function obtenerPlanes(req, res, next) {
   try {
     const planes = planModel.obtenerTodos();
@@ -23,6 +24,7 @@ function obtenerPlanes(req, res, next) {
   }
 }
 
+/** GET /planes/:id — Un plan o 404 */
 function obtenerPlanPorId(req, res, next) {
   try {
     const id = parseId(req.params.id);
@@ -47,6 +49,7 @@ function obtenerPlanPorId(req, res, next) {
   }
 }
 
+/** POST /planes — Crea plan; responde 201 */
 function crearPlan(req, res, next) {
   try {
     validarCamposRequeridos(req.body, planModel.CAMPOS_REQUERIDOS);
@@ -62,6 +65,7 @@ function crearPlan(req, res, next) {
   }
 }
 
+/** PUT /planes/:id — Actualiza plan existente */
 function actualizarPlan(req, res, next) {
   try {
     const id = parseId(req.params.id);
@@ -92,6 +96,7 @@ function actualizarPlan(req, res, next) {
   }
 }
 
+/** DELETE /planes/:id — Elimina plan */
 function eliminarPlan(req, res, next) {
   try {
     const id = parseId(req.params.id);

@@ -5,8 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ADSTA — Turismo San Agustín</title>
   <style>
+    /* ========================================================================
+       ESTILOS DEL PANEL ADSTA
+       Define la apariencia del dashboard: colores, layout, tabla, formularios,
+       notificaciones y animaciones. Sin frameworks; todo en este archivo.
+       ======================================================================== */
+
     @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap");
 
+    /* Paleta y medidas reutilizables en toda la página */
     :root {
       --verde-oscuro: #1a4d3e;
       --verde: #2d6a4f;
@@ -37,7 +44,7 @@
       overflow-x: hidden;
     }
 
-    /* Fondo decorativo */
+    /* Capas de fondo fijas: degradados suaves (naturaleza/turismo) detrás del contenido */
     body::before {
       content: "";
       position: fixed;
@@ -59,7 +66,7 @@
       opacity: 0.6;
     }
 
-    /* ——— Encabezado ——— */
+    /* Encabezado superior: título de ADSTA, logo y datos de contexto (solo presentación) */
     .header {
       background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde) 45%, var(--azul) 100%);
       color: var(--blanco);
@@ -155,7 +162,7 @@
 
     .header-meta span::before { content: "◆ "; color: var(--verde-claro); }
 
-    /* ——— Contenedor principal ——— */
+    /* Área central del dashboard: estadísticas, tabla y formulario (contenido operativo) */
     .main {
       max-width: 1200px;
       margin: -2rem auto 0;
@@ -165,7 +172,7 @@
       animation: fadeUp 0.8s ease-out 0.15s both;
     }
 
-    /* ——— Tarjetas estadísticas ——— */
+    /* Tres tarjetas resumen: total de hoteles, disponibles y si la API responde (se actualizan con JS) */
     .stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -205,7 +212,7 @@
 
     .stat-card.azul .value { color: var(--azul); }
 
-    /* ——— Layout dashboard ——— */
+    /* Distribución en dos columnas: tabla a la izquierda, formulario de alta a la derecha */
     .dashboard {
       display: grid;
       grid-template-columns: 1fr 340px;
@@ -213,11 +220,12 @@
       align-items: start;
     }
 
+    /* En pantallas pequeñas: una sola columna (tabla arriba, formulario abajo) */
     @media (max-width: 960px) {
       .dashboard { grid-template-columns: 1fr; }
     }
 
-    /* ——— Sección tabla ——— */
+    /* Bloque de la tabla: lista los hoteles que devuelve GET /hoteles */
     .section-card {
       background: var(--blanco);
       border-radius: var(--radio);
@@ -387,7 +395,7 @@
       animation: spin 0.8s linear infinite;
     }
 
-    /* ——— Formulario ——— */
+    /* Panel lateral para crear hoteles: los datos se envían con POST /hoteles */
     .form-card {
       background: var(--blanco);
       border-radius: var(--radio);
@@ -481,7 +489,7 @@
       transform: none;
     }
 
-    /* ——— Toast mensajes ——— */
+    /* Avisos flotantes (éxito o error) tras agregar, editar o eliminar un hotel */
     .toast-container {
       position: fixed;
       top: 1.25rem;
@@ -521,7 +529,7 @@
 
     .toast-icon { font-size: 1.2rem; flex-shrink: 0; }
 
-    /* ——— Modal editar ——— */
+    /* Ventana emergente para modificar un hotel existente (envía PUT /hoteles/:id) */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -600,7 +608,7 @@
 
     .modal-footer .btn-primary { flex: 2; margin-top: 0; }
 
-    /* ——— Footer ——— */
+    /* Pie de página con información del proyecto ADSTA */
     .footer {
       text-align: center;
       padding: 2rem 1.5rem;
@@ -613,7 +621,7 @@
 
     .footer strong { color: var(--verde); }
 
-    /* ——— Animaciones ——— */
+    /* Movimientos al cargar la página, filas de la tabla, toasts y spinner de carga */
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -652,6 +660,7 @@
       to { transform: rotate(360deg); }
     }
 
+    /* Ajustes en móvil: tabla más compacta y formulario sin posición fija al hacer scroll */
     @media (max-width: 600px) {
       th, td { padding: 0.75rem 0.85rem; font-size: 0.82rem; }
       .header { padding: 2rem 1rem 2.5rem; }
@@ -661,9 +670,10 @@
 </head>
 <body>
 
+  <!-- Contenedor vacío: aquí JavaScript inserta los mensajes de éxito o error -->
   <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-  <!-- Encabezado -->
+  <!-- Banner con nombre del proyecto y descripción (no consume la API) -->
   <header class="header">
     <div class="header-inner">
       <div class="logo-row">
@@ -682,8 +692,9 @@
     </div>
   </header>
 
-  <!-- Sección principal -->
+  <!-- Zona de trabajo: resumen numérico + tabla + formulario -->
   <main class="main">
+    <!-- Contadores que se rellenan al cargar los hoteles desde la API -->
     <div class="stats">
       <div class="stat-card">
         <div class="label">Hoteles registrados</div>
@@ -700,7 +711,7 @@
     </div>
 
     <div class="dashboard">
-      <!-- Tabla de hoteles -->
+      <!-- Listado dinámico: el cuerpo de la tabla lo genera JavaScript con los datos de la API -->
       <section class="section-card" aria-labelledby="tablaTitulo">
         <div class="section-header">
           <h2 id="tablaTitulo">Hoteles en San Agustín</h2>
@@ -718,7 +729,7 @@
         </div>
       </section>
 
-      <!-- Formulario agregar -->
+      <!-- Alta de hotel: al enviar, hace POST y refresca la tabla -->
       <aside class="form-card">
         <h2>Nuevo alojamiento</h2>
         <p class="subtitle">Registra un hotel y publícalo al instante en ADSTA.</p>
@@ -752,7 +763,7 @@
     </div>
   </main>
 
-  <!-- Modal editar -->
+  <!-- Ventana de edición: visible solo al pulsar "Editar" en una fila (PUT a la API) -->
   <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
     <div class="modal">
       <div class="modal-header">
@@ -794,7 +805,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Créditos y módulos futuros de la plataforma -->
   <footer class="footer">
     <p><strong>ADSTA</strong> — Plataforma turística · San Agustín, Huila, Colombia</p>
     <p>Hoteles · Planes · Reservas · Geolocalización · Reportes</p>
@@ -802,8 +813,15 @@
   </footer>
 
   <script>
+    /* ========================================================================
+       LÓGICA DEL PANEL
+       Conecta la interfaz con la API REST: carga, crea, edita y elimina hoteles.
+       ======================================================================== */
+
+    /* URL base del servidor Express (debe estar en npm run dev) */
     const API_BASE = "http://localhost:3000";
 
+    /* Referencias a elementos del DOM para no repetir querySelector */
     const $ = (sel) => document.querySelector(sel);
     const toastContainer = $("#toastContainer");
     const tablaContenido = $("#tablaContenido");
@@ -811,9 +829,10 @@
     const modalOverlay = $("#modalOverlay");
     const formEditar = $("#formEditar");
 
+    /* Copia local de la lista actual; se usa al editar o confirmar eliminación */
     let hotelesCache = [];
 
-    /** Formatea precio en pesos colombianos */
+    /** Convierte un número a formato moneda COP para mostrarlo en la tabla */
     function formatearPrecio(valor) {
       return new Intl.NumberFormat("es-CO", {
         style: "currency",
@@ -822,7 +841,7 @@
       }).format(valor);
     }
 
-    /** Muestra notificación toast */
+    /** Muestra un mensaje temporal arriba a la derecha (verde = éxito, rojo = error) */
     function mostrarToast(mensaje, tipo = "exito") {
       const toast = document.createElement("div");
       toast.className = `toast ${tipo}`;
@@ -834,7 +853,7 @@
       setTimeout(() => toast.remove(), 5000);
     }
 
-    /** Petición fetch genérica con manejo de errores */
+    /** Envía peticiones fetch a la API; si falla, lanza error con el mensaje del servidor */
     async function apiRequest(url, options = {}) {
       const res = await fetch(url, {
         headers: { "Content-Type": "application/json", ...options.headers },
@@ -847,7 +866,7 @@
       return data;
     }
 
-    /** Actualiza tarjetas de estadísticas */
+    /** Recalcula las tres tarjetas: total, disponibles y estado de conexión con la API */
     function actualizarStats(hoteles) {
       $("#statTotal").textContent = hoteles.length;
       $("#statDisponibles").textContent = hoteles.filter((h) => h.disponibilidad).length;
@@ -855,7 +874,7 @@
       $("#statApi").style.color = "var(--verde)";
     }
 
-    /** Renderiza la tabla de hoteles */
+    /** Pinta la tabla HTML con los hoteles y enlaza botones Editar / Eliminar */
     function renderizarTabla(hoteles) {
       hotelesCache = hoteles;
       actualizarStats(hoteles);
@@ -915,13 +934,14 @@
       });
     }
 
+    /** Evita que texto del usuario se interprete como HTML (seguridad en la tabla) */
     function escapeHtml(texto) {
       const div = document.createElement("div");
       div.textContent = texto;
       return div.innerHTML;
     }
 
-    /** GET /hoteles — Cargar listado */
+    /** Pide GET /hoteles, muestra spinner y luego dibuja la tabla o mensaje de error */
     async function cargarHoteles() {
       tablaContenido.innerHTML = `
         <div class="loading-state">
@@ -946,7 +966,7 @@
       }
     }
 
-    /** POST /hoteles — Agregar hotel */
+    /** Al enviar el formulario lateral: POST /hoteles, limpia campos y recarga la tabla */
     formAgregar.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = $("#btnAgregar");
@@ -975,7 +995,7 @@
       }
     });
 
-    /** DELETE /hoteles/:id */
+    /** Pide confirmación y luego DELETE /hoteles/:id; actualiza la lista si tiene éxito */
     async function eliminarHotel(id) {
       const hotel = hotelesCache.find((h) => h.id === id);
       const nombre = hotel ? hotel.nombre : `id ${id}`;
@@ -990,7 +1010,7 @@
       }
     }
 
-    /** Abrir modal de edición */
+    /** Rellena el modal con los datos del hotel seleccionado y lo muestra en pantalla */
     function abrirModalEditar(id) {
       const hotel = hotelesCache.find((h) => h.id === id);
       if (!hotel) return;
@@ -1005,6 +1025,7 @@
       modalOverlay.classList.add("activo");
     }
 
+    /** Oculta la ventana de edición sin guardar cambios */
     function cerrarModal() {
       modalOverlay.classList.remove("activo");
     }
@@ -1015,7 +1036,7 @@
       if (e.target === modalOverlay) cerrarModal();
     });
 
-    /** PUT /hoteles/:id */
+    /** Al guardar en el modal: PUT /hoteles/:id, cierra ventana y refresca la tabla */
     formEditar.addEventListener("submit", async (e) => {
       e.preventDefault();
       const id = $("#editId").value;
@@ -1040,8 +1061,10 @@
       }
     });
 
+    /* Botón "Actualizar": vuelve a pedir la lista sin recargar toda la página */
     $("#btnRefresh").addEventListener("click", cargarHoteles);
 
+    /* Al abrir /panel, carga automáticamente los hoteles de la API */
     document.addEventListener("DOMContentLoaded", cargarHoteles);
   </script>
 </body>

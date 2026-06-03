@@ -1,5 +1,5 @@
 /**
- * Modelo en memoria para planes turísticos de ADSTA.
+ * Almacén en memoria de planes turísticos: CRUD sin base de datos.
  */
 
 const { planesIniciales } = require("../data/seed");
@@ -15,14 +15,17 @@ const CAMPOS_REQUERIDOS = [
   "descripcion",
 ];
 
+/** Devuelve todos los planes */
 function obtenerTodos() {
   return planes;
 }
 
+/** Busca un plan por id */
 function obtenerPorId(id) {
   return planes.find((p) => p.id === id);
 }
 
+/** Inserta un plan nuevo con id autoincremental */
 function crear(datos) {
   const nuevoPlan = {
     id: siguienteId++,
@@ -36,6 +39,7 @@ function crear(datos) {
   return nuevoPlan;
 }
 
+/** Actualiza un plan existente; null si no hay coincidencia de id */
 function actualizar(id, datos) {
   const indice = planes.findIndex((p) => p.id === id);
   if (indice === -1) return null;
@@ -52,6 +56,7 @@ function actualizar(id, datos) {
   return planes[indice];
 }
 
+/** Elimina un plan del array */
 function eliminar(id) {
   const indice = planes.findIndex((p) => p.id === id);
   if (indice === -1) return null;
