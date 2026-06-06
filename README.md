@@ -4,11 +4,11 @@ La plataforma de tecnólogia ADTSA esta pensada, para posicionarse como la soluc
 de **San Agustín (Huila, Colombia)**. Nuestro proposito es brindar los mejores alojamientos, buena información turistica con una buena experiencia segura, transparente y enriquecedora, para que se sientan conectados con San Agustín, su alegria y magia de las personas, nuestra cultura ancestral y la riqueza natural de este hermoso pueblo.
 
 A través de esta aplicación, los turistas y usuarios pueden:
-* **Gestionar hoteles, planes turísticos y reservas en memoria (sin base de datos por el momento)
+* **Gestionar hoteles, planes turísticos y hacer reservas (por el momento solo en memoria, sin base de datos )
 
 El objetivo fundamental de ADTSA es transformar la información en una herramienta de hospitalidad, logrando que cada viajero que llegue al municipio se sienta guiado, seguro y motivado a tener unas vacaciones inolvidables. 
 
-**URL base:** `http://localhost:3000`
+**URL base:** `http://localhost:3000/panel`
 
 ---
 
