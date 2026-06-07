@@ -820,7 +820,7 @@
        ======================================================================== */
 
     /* URL base del servidor Express (debe estar en npm run dev) */
-    const API_BASE = "http://localhost:3000";
+    const API_URL = window.location.hostname === 'localhost' ? 'http://localhost:3000' : '';
 
     /* Referencias a elementos del DOM para no repetir querySelector */
     const $ = (sel) => document.querySelector(sel);
