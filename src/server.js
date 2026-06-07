@@ -4,7 +4,7 @@
 
 const app = require("./app");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 /* Inicia el servidor y muestra en consola las URLs principales */
 app.listen(PORT, () => {
